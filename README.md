@@ -21,9 +21,10 @@ Telegram讨论组:[🍟 整点薯条](https://t.me/GetSomeFries)
   - [功能列表](#功能列表-1)
   - [todo](#todo-1)
   - [使用方式](#使用方式-1)
+  - [Surge配置文件示例](#surge配置文件示例)
   - [可用IP](#可用ip)
-    - [Personal](#personal)
-    - [Teams](#teams)
+    - [Personal & WARP](#personal--warp)
+    - [Teams & WARP+](#teams--warp)
   - [安装链接](#安装链接-1)
     - [🧪测试版](#测试版-1)
 - [🍟 Disney Plus](#-disney-plus)
@@ -175,10 +176,29 @@ Telegram讨论组:[🍟 整点薯条](https://t.me/GetSomeFries)
       6. 点击Cloudflare WARP页面右上角的`圆箭头按钮`运行
       7. 记录下日志中提供的信息
 
+## Surge配置文件示例
+  * 客户端私钥：private-key，由Wireguard客户端生成
+  * 节点公钥：public-key，Cloudflare WARP的公钥始终为`bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=`
+  * 可用IP：endpoint，目前Surge仅支持单节点(peer)，所以需要选择一个可用IP，详见[可用IP](#可用IP)
+```
+[Proxy]
+WARP = wireguard, section-name = Cloudflare
+
+[Group]
+你的策略组 = 节点1, 节点2, 节点3, WARP
+
+[WireGuard Cloudflare]
+private-key = 客户端私钥
+self-ip = 172.16.0.254
+dns-server = 1.1.1.1
+mtu = 1280
+peer = (public-key = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, allowed-ips = 0.0.0.0/0, endpoint = 可用IP:2408)
+```
+
 ## 可用IP
   * host主机名均为: `engage.cloudflareclient.com:2408`
 
-### Personal 
+### Personal & WARP
 | 162.159.192.0 | [2606:4700:d0::a29f:c000] |
 | :---: | :---: |
 | 162.159.192.1:2408 | [2606:4700:d0::a29f:c001]:2408
@@ -191,7 +211,7 @@ Telegram讨论组:[🍟 整点薯条](https://t.me/GetSomeFries)
 | 162.159.192.8:2408 | [2606:4700:d0::a29f:c008]:2408
 | 162.159.192.9:2408 | [2606:4700:d0::a29f:c009]:2408
 
-### Teams 
+### Teams & WARP+
 | 162.159.193.0 | [2606:4700:d0::a29f:c100] |
 | :---: | :---: |
 | 162.159.193.1:2408 | [2606:4700:d0::a29f:c101]:2408
