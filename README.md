@@ -181,7 +181,7 @@ Telegram讨论组:[🍟 整点薯条](https://t.me/GetSomeFries)
       6. 点击Cloudflare WARP页面右上角的`圆箭头按钮`运行
       7. 记录下日志中提供的信息
 ### 更换密钥对(用自定义密钥对)(注册ID & 令牌)
-  * 操作流程：
+  * 操作流程1(使用BoxJs)：
       1. 运行方式选择`更换密钥对(用自定义密钥对)(注册ID & 令牌)`
       2. 在WireGuard客户端中`新建隧道`-`生成密钥对`
       3. 将`WireGuard生成的私钥和公钥`或`你要换绑的私钥和公钥`填写到`WireGuard: 私钥`和`WireGuard: 公钥`
@@ -189,9 +189,19 @@ Telegram讨论组:[🍟 整点薯条](https://t.me/GetSomeFries)
       5. 填写此注册ID对应的token到`WARP: 验证内容/Verify Content`(可通过模块读取)
       6. 点击页面下方的`保存`
       7. 点击Cloudflare WARP页面右上角的`圆箭头按钮`运行
-      8. 查看执行结果
+      8. 查看执行结果(`通知`或`日志`)
         * 注：如果此`注册ID`为某个`1.1.1.1`APP的`注册ID`，则启用此`1.1.1.1`APP会自动将您`自定义的密钥对`换回`APP生成的密钥对`
         * 注2：如想正常打开`1.1.1.1`APP并使用APP的其他功能如账户信息，流量查看，邀请等功能，请使用Surge模块锁定`密钥对`始终为`自定义的密钥对`，但APP因密钥对不符，自身的VPN功能将无法使用。
+  * 操作流程2(使用BoxJs+Surge模块)：
+      1. 在WireGuard客户端中`新建隧道`-`生成密钥对`
+      2. 将`WireGuard生成的私钥和公钥`或`你要换绑的私钥和公钥`填写到`WireGuard: 私钥`和`WireGuard: 公钥`
+      3. 填写你要绑定到此密钥对的`WARP: 注册ID(设备ID/客户端ID/配置文件ID)`(可通过模块读取，或查看iOS`1.1.1.1`APP选项-高级-诊断-客户端配置-ID)
+      4. 点击页面下方的`保存`
+      5. 打开`1.1.1.1`APP
+      6. 执行`重置加密密钥`操作(iOS客户端位于:选项-`高级`-`连接选项`-`重置加密密钥`)
+      7. 查看执行结果(`通知`或`日志`)
+        * 注：保持模块开启情况下，可正常打开`1.1.1.1`APP并使用APP的其他功能如账户信息，流量查看，邀请等功能，单`1.1.1.1`APP因密钥对不符，自身的VPN功能将无法使用。
+
 
 ## Surge配置文件示例
   * 客户端私钥：private-key，由Wireguard客户端生成
@@ -248,7 +258,7 @@ peer = (public-key = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, allowed-ips =
 
   * Surge:
     * [Cloudflare_1.1.1.1_with_WARP.beta.sgmodule](./sgmodule/Cloudflare_1.1.1.1_with_WARP.beta.sgmodule?raw=true "🍟 Cloudflare 1.1.1.1 APP with WARP Client Info")
-    * 此模块仅查询1.1.1.1 APP的配置信息,增删改请用上方BoxJs订阅或APP客户端
+    * 此模块可查询1.1.1.1 APP的配置信息,也可重写密钥为`自定义密钥`,其他增删改请用上方BoxJs订阅或APP客户端
       * Surge安装后，重新打开一次1.1.1.1的APP，即可在通知中看到配置信息，在Surge的日志中也会输出完整配置文件内容
 
 ---
